@@ -6,12 +6,11 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.antonio.database.DatabaseDefinition.TABLE_ALBUM
 import com.antonio.database.model.AlbumEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AlbumDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(album: AlbumEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAlbums(albums: List<AlbumEntity>)
 
     @Query("SELECT * FROM $TABLE_ALBUM")
     fun getAllAlbums(): List<AlbumEntity>
@@ -21,5 +20,8 @@ interface AlbumDao {
         SELECT * FROM $TABLE_ALBUM
         WHERE id IN (:ids) """,
     )
-    fun getAlbums(ids: Set<Int>): Flow<List<AlbumEntity>>
+    fun getAlbums(ids: Set<Int>): List<AlbumEntity>
+
+    @Query("DELETE FROM $TABLE_ALBUM")
+    fun clearAlbums()
 }

@@ -23,3 +23,6 @@ rootProject.name = "Album Titles"
 include(":app")
 include(":core:network")
 include(":core:database")
+include(":core:data")
+include(":core:domain")
+include(":core:model")
