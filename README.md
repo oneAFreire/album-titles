@@ -20,3 +20,6 @@ The app supports **offline mode**, **configuration changes**, and has **unit tes
 1. Clone and build the repo:  
    ```sh
    git clone https://github.com/oneAFreire/album-titles.git
+
+## ** Justifications of the choices made
+- For justifications of the choices made, please view the [JUSTIFICATION.md](JUSTIFICATION.md) 
