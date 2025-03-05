@@ -1,12 +1,12 @@
-package com.antonio.domain
+package com.antonio.domain.usecase
 
 import com.antonio.data.repository.AlbumRepository
 import javax.inject.Inject
 
-class SyncAlbumsUseCase @Inject constructor(
+internal class SyncAlbumsUseCaseImpl @Inject constructor(
     private val albumRepository: AlbumRepository
-) {
-    suspend operator fun invoke(): Boolean {
+): SyncAlbumsUseCase {
+    override suspend operator fun invoke(): Boolean {
         return albumRepository.syncAlbums()
     }
 }

@@ -1,13 +1,13 @@
-package com.antonio.domain
+package com.antonio.domain.usecase
 
 import com.antonio.data.repository.AlbumRepository
 import com.antonio.model.Album
 import javax.inject.Inject
 
-class GetAlbumsUseCase @Inject constructor(
+internal class GetAlbumsUseCaseImpl @Inject constructor(
     private val albumRepository: AlbumRepository
-) {
-    suspend operator fun invoke(): List<Album> {
+): GetAlbumsUseCase {
+    override suspend operator fun invoke(): List<Album> {
         return albumRepository.getAlbums()
     }
 }

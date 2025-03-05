@@ -1,4 +1,4 @@
-package com.antonio.albumtitles.ui.theme
+package com.antonio.designsystem.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

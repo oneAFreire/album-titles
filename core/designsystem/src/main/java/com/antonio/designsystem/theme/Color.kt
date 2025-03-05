@@ -1,4 +1,4 @@
-package com.antonio.albumtitles.ui.theme
+package com.antonio.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 

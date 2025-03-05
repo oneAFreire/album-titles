@@ -1,6 +1,7 @@
 package com.antonio.data.di
 
 import com.antonio.data.repository.AlbumRepository
+import com.antonio.data.repository.AlbumRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,6 +13,6 @@ abstract class DataModule {
 
     @Binds
     internal abstract fun bindsAlbumRepository(
-        albumRepository: AlbumRepository,
+        albumRepositoryImpl: AlbumRepositoryImpl,
     ): AlbumRepository
 }
