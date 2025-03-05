@@ -1,5 +1,6 @@
 package com.antonio.database.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -21,6 +22,9 @@ interface AlbumDao {
         WHERE id IN (:ids) """,
     )
     fun getAlbums(ids: Set<Int>): List<AlbumEntity>
+
+    @Query("SELECT * FROM $TABLE_ALBUM ORDER BY id ASC")
+    fun getPagedAlbums(): PagingSource<Int, AlbumEntity>
 
     @Query("DELETE FROM $TABLE_ALBUM")
     fun clearAlbums()

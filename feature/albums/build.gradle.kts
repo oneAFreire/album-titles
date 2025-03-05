@@ -1,13 +1,13 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrainsKotlinKapt)
     alias(libs.plugins.googleDaggerHiltAndroid)
-    alias(libs.plugins.googleDevtoolsKsp)
 }
 
 android {
-    namespace = "com.antonio.database"
+    namespace = "com.antonio.albums"
     compileSdk = 35
 
     defaultConfig {
@@ -36,20 +36,31 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    implementation(project(":core:designsystem"))
+    implementation(project(":core:model"))
+    api(project(":core:domain"))
+
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
 
     // Dagger-Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 
-    // Room
-    implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.room.paging)
+    // Hilt Navigation Compose
+    implementation(libs.androidx.hilt.navigation.compose)
 
+    implementation(libs.androidx.paging.compose)
+
+    implementation(libs.coil.compose)
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

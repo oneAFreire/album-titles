@@ -44,6 +44,7 @@ android {
 dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":core:model"))
+    implementation(project(":feature:albums"))
     api(project(":core:domain"))
 
     implementation(libs.androidx.core.ktx)

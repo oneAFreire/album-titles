@@ -9,7 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SimpleTopBar(
+fun AlbumTitlesTopBar(
     title: String,
     modifier: Modifier = Modifier
 ) {
@@ -22,5 +22,5 @@ fun SimpleTopBar(
 @Preview
 @Composable
 fun PreviewSimpleTopBar() {
-    SimpleTopBar(title = "Album Titles")
+    AlbumTitlesTopBar(title = "Album Titles")
 }
