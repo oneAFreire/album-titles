@@ -1,7 +1,6 @@
 package com.antonio.albums
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -9,12 +8,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -38,7 +38,7 @@ internal fun AlbumsScreen(
     val albums = albumViewModel.albums.collectAsLazyPagingItems()
 
     Scaffold(
-        topBar = { AlbumTitlesTopBar(title = "Meu App") },
+        topBar = { AlbumTitlesTopBar(title = stringResource(id = R.string.top_bar_title)) },
         content = { paddingValues ->
             LazyColumn(
                 modifier = Modifier.padding(paddingValues),
@@ -54,6 +54,7 @@ internal fun AlbumsScreen(
                         loadState.refresh is LoadState.Loading -> {
                             item { CircularProgressIndicator() }
                         }
+
                         loadState.append is LoadState.Loading -> {
                             item { CircularProgressIndicator() }
                         }
@@ -62,7 +63,10 @@ internal fun AlbumsScreen(
 
                 if (albums.loadState.refresh is LoadState.Error) {
                     item {
-                        Text("Erro ao carregar dados", modifier = Modifier.padding(16.dp))
+                        Text(
+                            stringResource(id = R.string.error_getting_data),
+                            modifier = Modifier.padding(16.dp)
+                        )
                     }
                 }
             }
@@ -72,21 +76,22 @@ internal fun AlbumsScreen(
 
 @Composable
 fun AlbumItem(album: Album) {
+    val context = LocalContext.current
+
+    val imageLoader = remember { getImageLoader(context) }
+
     Row(modifier = Modifier.padding(8.dp)) {
         Image(
             painter = rememberAsyncImagePainter(
-                model = ImageRequest.Builder(LocalContext.current)
+                model = ImageRequest.Builder(context)
                     .data(album.thumbnailUrl)
                     .build(),
-                imageLoader = getImageLoader(LocalContext.current)
+                imageLoader = imageLoader
             ),
-            contentDescription = "Album Cover",
+            contentDescription = stringResource(id = R.string.album_cover),
             modifier = Modifier.size(64.dp)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Column {
-            Text(text = album.title, fontWeight = FontWeight.Bold)
-            Text(text = "ID: ${album.id}", style = MaterialTheme.typography.bodySmall)
-        }
+        Text(text = album.title, fontWeight = FontWeight.Bold)
     }
 }

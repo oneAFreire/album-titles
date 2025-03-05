@@ -8,8 +8,10 @@ import com.antonio.domain.usecase.GetAlbumsUseCase
 import com.antonio.domain.usecase.SyncAlbumsUseCase
 import com.antonio.model.Album
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,20 +27,18 @@ class AlbumViewModel @Inject constructor(
         refreshAlbums()
     }
 
-    fun loadAlbums() {
+    private fun loadAlbums() {
         viewModelScope.launch {
-            getAlbumsUseCase().cachedIn(viewModelScope).collect { pagingData ->
-                _albums.value = pagingData
+            getAlbumsUseCase().cachedIn(viewModelScope).collectLatest {
+                _albums.value = it
             }
         }
     }
 
     private fun refreshAlbums() {
-        viewModelScope.launch {
-            val success = syncAlbumsUseCase()
-            if (success) {
-                loadAlbums()
-            }
+        viewModelScope.launch(Dispatchers.IO) {
+            runCatching { syncAlbumsUseCase() }
+            loadAlbums()
         }
     }
 }

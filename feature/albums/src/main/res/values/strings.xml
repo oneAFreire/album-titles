@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="top_bar_title">Album Titles</string>
+    <string name="album_cover">Album Cover</string>
+    <string name="error_getting_data">Error getting data</string>
+</resources>
