@@ -40,12 +40,13 @@ Is the main Android app
 
 ### core
 Is the folder where the core modules are organized
--**data**: This module is responsible for providing the data to the UseCases, managing the data sources between different data sources (database, network, etc), and mapping it to the correct data model used in the app.
--**database** This module provides offline storage in a local database.
--**designsystem** This module provides the UI components that can be shared between features and the app theme.
--**domain** This module is where the business logic is located, organized in UseCases.
--**model** This module provides the base data classes (models) used in the main app.
--**network** This module provides the methods to fetch data from the internet.
+
+-**data**: This module is responsible for providing the data to the UseCases, managing the data sources between different data sources (database, network, etc), and mapping it to the correct data model used in the app.\
+-**database** This module provides offline storage in a local database.\
+-**designsystem** This module provides the UI components that can be shared between features and the app theme.\
+-**domain** This module is where the business logic is located, organized in UseCases.\
+-**model** This module provides the base data classes (models) used in the main app.\
+-**network** This module provides the methods to fetch data from the internet.\
 
 ### feature
 This is where the app's UI features are organized and separated into modules (each model has its UI and ViewModel.
