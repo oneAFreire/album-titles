@@ -45,10 +45,8 @@ dependencies {
     // Paging compose
     implementation(libs.androidx.paging.compose)
 
+    // Testing
+    testImplementation(libs.mockito.core)
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }
